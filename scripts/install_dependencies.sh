@@ -1,2 +1,12 @@
-!/bin/bash
-if ! [ -x "$(command -v httpd)" ]; then sudo amazon-linux-extras install -y lamp-mariadb10.2-php8.2 php8.2 >&2;   exit 1; fi # install apache if not already installed
+#!/bin/bash
+set -e
+
+echo "Installing Apache and PHP on Amazon Linux 2023..."
+
+sudo dnf -y update
+sudo dnf -y install httpd php php-cli php-mysqlnd
+
+sudo systemctl enable httpd
+sudo systemctl start httpd
+
+echo "Installation complete."
